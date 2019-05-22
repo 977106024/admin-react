@@ -15,3 +15,15 @@ export const qrLogin = (param) => (
         params:param
     })
 )
+
+/**
+ * 获取登录状态 是否确认登录 get
+ * @param uuid
+ */
+export const loginStatus = (param) => (
+    axios({
+        method:'get',
+        url:`${APIURL}/admin/LoginStatus`,
+        params:param
+    })
+)
