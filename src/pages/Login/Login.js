@@ -69,7 +69,7 @@ class Login extends React.Component {
                 clearInterval(this.isLogin)
 
                 //进入后台 跳转首页
-                this.props.history.push('/')
+                this.props.history.push('/index')
             }
         })
     }

@@ -12,8 +12,8 @@ export default class RouterApp extends React.Component {
     render() {
         return (
             <Router>
-                <Route path="/" component={Login}></Route>
-                <Route path="/Index" component={Index}></Route>
+                <Route exact path="/" component={Login}></Route>
+                <Route path="/index" component={Index}></Route>
             </Router>
         )
     }
