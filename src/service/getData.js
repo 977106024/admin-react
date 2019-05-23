@@ -10,9 +10,9 @@ import APIURL from '@/config/env'
  */
 export const qrLogin = (param) => (
     axios({
-        method:'get',
-        url:`${APIURL}/admin/QrLogin`,
-        params:param
+        method: 'get',
+        url: `${APIURL}/admin/QrLogin`,
+        params: param
     })
 )
 
@@ -22,8 +22,20 @@ export const qrLogin = (param) => (
  */
 export const loginStatus = (param) => (
     axios({
-        method:'get',
-        url:`${APIURL}/admin/LoginStatus`,
-        params:param
+        method: 'get',
+        url: `${APIURL}/admin/LoginStatus`,
+        params: param
+    })
+)
+
+/**
+ * 二维码状态
+ * @param uuid
+ */
+export const statusQr = (param) => (
+    axios({
+        methods: 'get',
+        url: `${APIURL}/admin/statusQr`,
+        params: param
     })
 )
