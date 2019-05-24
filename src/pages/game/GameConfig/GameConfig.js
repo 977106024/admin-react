@@ -10,7 +10,7 @@ export default class GameConfig extends React.Component{
         searchCriteria:['游戏名称','游戏id']
     }
 
-    getFieldDecorator(val){
+    criteriaVal(val){
         console.log(val)
     }
 
@@ -18,7 +18,7 @@ export default class GameConfig extends React.Component{
         return (
             <section id="GameConfig">
                 <Card title="游戏配置" extra={<a href="#">添加游戏</a>} style={{ width: '100%' }}>
-                    <SearchFrom searchCriteria={this.state.searchCriteria} from={this.getFieldDecorator.bind(this)}/>
+                    <SearchFrom criteria={this.state.searchCriteria} criteriaVal={this.criteriaVal.bind(this)}/>
                 </Card>
                 <Card className="card-table" size="small" title="Small size card" extra={<a href="#">More</a>} style={{ width: '100%' }}>
                     <p>Card content</p>

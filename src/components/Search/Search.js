@@ -9,22 +9,22 @@ class Search extends React.Component{
 
     // To generate mock Form.Item
     getFields() {
-        const searchCriteria = this.props.searchCriteria
-        const count = this.state.expand ? 10 : searchCriteria.length;
+        const criteria = this.props.criteria
+        const count = this.state.expand ? 10 : criteria.length;
         const { getFieldDecorator } = this.props.form;
         const children = [];
-        for (let i = 0; i < searchCriteria.length; i++) {
+        for (let i = 0; i < criteria.length; i++) {
             children.push(
                 <Col span={8} key={i} style={{ display: i < count ? 'block' : 'none' }}>
-                    <Form.Item label={`${searchCriteria[i]}`}>
-                        {getFieldDecorator(`${searchCriteria[i]}`, {
+                    <Form.Item label={`${criteria[i]}`}>
+                        {getFieldDecorator(`${criteria[i]}`, {
                             rules: [
                                 {
-                                    required: true,
-                                    message: 'Input something!',
+                                    type: "number",
+                                    message: 'id必须为数组!',
                                 },
                             ],
-                        })(<Input placeholder={`请输入${searchCriteria[i]}`} />)}
+                        })(<Input placeholder={`请输入${criteria[i]}`} />)}
                     </Form.Item>
                 </Col>,
             );
