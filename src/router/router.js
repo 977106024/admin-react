@@ -1,8 +1,10 @@
 import React from "react";
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {Route} from "react-router-dom";
 
 import Login from '../pages/Login/Login'
 import Index from '../pages/Index/Index'
+import GameConfig from '../pages/game/GameConfig/GameConfig'
+import GameQuery from '../pages/game/GameQuery/GameQuery'
 
 export default class RouterApp extends React.Component {
     constructor(props) {
@@ -11,10 +13,11 @@ export default class RouterApp extends React.Component {
 
     render() {
         return (
-            <Router>
-                <Route exact path="/" component={Login}></Route>
-                <Route path="/index" component={Index}></Route>
-            </Router>
+            <div>
+                <Route path="/login" component={Login}></Route>
+                <Route path="/gameConfig" component={GameConfig}></Route>
+                <Route path="/gameQuery" component={GameQuery}></Route>
+            </div>
         )
     }
 }
