@@ -7,9 +7,22 @@ import SearchFrom from '@/components/Search/Search'
 export default class GameConfig extends React.Component{
 
     state = {
-        searchCriteria:['游戏名称','游戏id']
+        searchCriteria:{
+            name:{
+                    name:"游戏名称",
+                    id:"游戏Id",
+                    xxx:"4",
+                    sss:"55",
+                    sss:"8888"
+                },
+            type:{
+                name:"text",
+                id:"number"
+            }
+        }
     }
 
+    //search
     criteriaVal(val){
         console.log(val)
     }
