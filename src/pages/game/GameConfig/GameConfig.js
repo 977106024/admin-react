@@ -1,8 +1,81 @@
 import React from 'react'
 import './Index.scss'
-import { Card } from 'antd';
+import { Card, Table, Divider, Tag } from 'antd';
 import SearchFrom from '@/components/Search/Search'
 
+const columns = [
+    {
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
+        render: text => <a href="javascript:;">{text}</a>,
+},
+{
+    title: 'Age',
+        dataIndex: 'age',
+    key: 'age',
+},
+{
+    title: 'Address',
+        dataIndex: 'address',
+    key: 'address',
+},
+{
+    title: 'Tags',
+        key: 'tags',
+    dataIndex: 'tags',
+    render: tags => (
+<span>
+{tags.map(tag => {
+        let color = tag.length > 5 ? 'geekblue' : 'green';
+    if (tag === 'loser') {
+        color = 'volcano';
+    }
+    return (
+        <Tag color={color} key={tag}>
+    {tag.toUpperCase()}
+    </Tag>
+);
+})}
+</span>
+),
+},
+{
+    title: 'Action',
+        key: 'action',
+    render: (text, record) => (
+<span>
+<a href="javascript:;">Invite {record.name}</a>
+<Divider type="vertical" />
+    <a href="javascript:;">Delete</a>
+    </span>
+),
+},
+];
+
+const data = [
+    {
+        key: '1',
+        name: 'John Brown',
+        age: 32,
+        address: 'New York No. 1 Lake Park',
+        tags: ['nice', 'developer'],
+    },
+    {
+        key: '2',
+        name: 'Jim Green',
+        age: 42,
+        address: 'London No. 1 Lake Park',
+        tags: ['loser'],
+    },
+    {
+        key: '3',
+        name: 'Joe Black',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park',
+        tags: ['cool', 'teacher'],
+    },
+];
 
 export default class GameConfig extends React.Component{
 
@@ -33,10 +106,8 @@ export default class GameConfig extends React.Component{
                 <Card title="游戏配置" extra={<a href="#">添加游戏</a>} style={{ width: '100%' }}>
                     <SearchFrom criteria={this.state.searchCriteria} criteriaVal={this.criteriaVal.bind(this)}/>
                 </Card>
-                <Card className="card-table" size="small" title="Small size card" extra={<a href="#">More</a>} style={{ width: '100%' }}>
-                    <p>Card content</p>
-                    <p>Card content</p>
-                    <p>Card content</p>
+                <Card className="card-table" size="small" style={{ width: '100%' }}>
+                    <Table columns={columns} dataSource={data} />
                 </Card>
             </section>
         )
