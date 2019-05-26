@@ -1,5 +1,8 @@
 import React from 'react'
 import { Upload, Icon, message } from 'antd';
+import {uploadImg} from '@/service/getData'
+import axios from 'axios'
+
 
 function getBase64(img, callback) {
     const reader = new FileReader();
@@ -19,7 +22,7 @@ function beforeUpload(file) {
     return isJPG && isLt2M;
 }
 
-export default class UpLoadImg extends React.Component {
+export default class UploadCom extends React.Component {
     state = {
         loading: false,
     };
@@ -40,6 +43,27 @@ export default class UpLoadImg extends React.Component {
         }
     };
 
+    uploadFile(e){
+        // const {filename,file} = val
+        let file = e.target.files[0]
+
+        const formData = new FormData();
+        formData.append("imgFile", file, file.name);
+        uploadImg(formData).then(res=>{
+            console.log(res)
+        })
+
+        // let config = {
+        //     headers:{'Content-Type':'multipart/form-data'}
+        // };  //添加请求头
+        // axios.get('https://api.xuewuzhijing.top/admin/Upload?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiNDJlYjVhMTAtN2ZiMS0xMWU5LWI5ZGItMTNkYWFjZWNmNTFmIiwiaWF0IjoxNTU4ODczNTA0LCJleHAiOjE1NTg4NzcxMDR9.Xesg2OHpSTIaLdcDCNwfMw6sQMZwtsYxj3QFdEZXkN4',{
+        //     params:formData,
+        //     config
+        // }).then(res=>{
+        //     console.log(res)
+        // })
+    }
+
     render() {
         const uploadButton = (
             <div>
@@ -49,17 +73,7 @@ export default class UpLoadImg extends React.Component {
         );
         const imageUrl = this.state.imageUrl;
         return (
-            <Upload
-                name="avatar"
-                listType="picture-card"
-                className="avatar-uploader"
-                showUploadList={false}
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                beforeUpload={beforeUpload}
-                onChange={this.handleChange}
-            >
-                {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
-            </Upload>
+            <input type="file" onChange={this.uploadFile.bind(this)}/>
         );
     }
 }

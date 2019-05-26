@@ -1,6 +1,7 @@
 import React from 'react'
-import UploadImg from '@/components/UpLoad/UpLoad'
-import {Card,Form,Input,Rate,Upload,Button,Icon,message } from 'antd'
+import UploadImgCom from '@/components/UpLoad/UpLoad'
+import {Card,Form,Input,Rate,Button,Icon,message } from 'antd'
+
 
 class GameDetails extends React.Component {
     state = {
@@ -36,6 +37,15 @@ class GameDetails extends React.Component {
         }
     };
 
+    handleSubmit = e => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
+    };
+
     render(){
         const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
@@ -51,16 +61,20 @@ class GameDetails extends React.Component {
         );
         return (
             <section id="GameDetails">
-                <Card title="游戏详情" style={{ width: '100%' }}>
+                <Card title="游戏详情" style={{ width: '100%' }} onSubmit={this.handleSubmit}>
                     <Form {...formItemLayout}>
                         <Form.Item label="游戏">
                             <span className="ant-form-text">新增or编辑</span>
                         </Form.Item>
                         <Form.Item label="游戏名称">
-                            <Input placeholder="请输入游戏名称"/>
+                            {getFieldDecorator('name', {
+
+                            })(<Input placeholder="请输入游戏名称"/>)}
                         </Form.Item>
                         <Form.Item label="url地址">
-                            <Input placeholder="请输入游戏url"/>
+                            {getFieldDecorator('url', {
+
+                            })(<Input placeholder="请输入游戏url"/>)}
                         </Form.Item>
                         <Form.Item label="Rate">
                             {getFieldDecorator('rate', {
@@ -68,7 +82,7 @@ class GameDetails extends React.Component {
                             })(<Rate />)}
                         </Form.Item>
                         <Form.Item label="封面">
-                            <UploadImg/>
+                            <UploadImgCom/>
                         </Form.Item>
                         <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                             <Button type="primary" htmlType="submit">

@@ -5,8 +5,8 @@ import { Breadcrumb, Alert } from 'antd';
 
 
 const breadcrumbNameMap = {
-    '/gameConfig': '游戏配置',
-    '/gameQuery': '游戏查询'
+    '/index/gameConfig': '游戏配置',
+    '/index/gameQuery': '游戏查询'
 };
 const columnName = {
     'game':'游戏管理'

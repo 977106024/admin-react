@@ -1,7 +1,7 @@
 import React from 'react'
 import './Index.scss'
 import {Link} from 'react-router-dom'
-import RouterApp from '@/router/router'
+import {RouterMain} from '@/router/router'
 import Home from '@/components/Breadcrumb/Breadcrumb'
 import {Layout, Menu, Breadcrumb, Icon} from 'antd';
 
@@ -70,10 +70,10 @@ export default class Index extends React.Component {
                                     }
                                 >
                                     <Menu.Item key="1">
-                                        <Link to="/gameConfig">配置游戏</Link>
+                                        <Link to="/index/gameConfig">配置游戏</Link>
                                     </Menu.Item>
                                     <Menu.Item key="2">
-                                        <Link to="/gameQuery">游戏查询</Link>
+                                        <Link to="/index/gameQuery">游戏查询</Link>
                                     </Menu.Item>
                                     <Menu.Item key="3">option3</Menu.Item>
                                     <Menu.Item key="4">option4</Menu.Item>
@@ -121,7 +121,7 @@ export default class Index extends React.Component {
                                     minHeight: 280,
                                 }}
                             >
-                                <RouterApp/>
+                                <RouterMain/>
                             </Content>
                         </Layout>
                     </Layout>

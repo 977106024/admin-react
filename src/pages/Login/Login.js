@@ -65,11 +65,12 @@ class Login extends React.Component {
         }
         loginStatus(data).then(res => {
             let $res = res.data
-            if ($res.code === 200 && $res.data) {
+            if ($res.code === 200 && $res.data.status) {
                 clearInterval(this.isLogin)
+                localStorage.setItem('TOKEN',$res.data.token)
 
                 //进入后台 跳转首页
-                this.props.history.push('/index')
+                this.props.history.push('/index/gameConfig')
             }
         })
     }

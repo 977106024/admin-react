@@ -5,10 +5,11 @@ import * as serviceWorker from './serviceWorker';
 
 import {BrowserRouter as Router} from "react-router-dom";
 import Index from './pages/Index/Index'
+import {RouterApp} from './router/router'
 
 ReactDOM.render(
     <Router>
-        <Index/>
+        <RouterApp/>
     </Router>
     , document.getElementById('root'));
 

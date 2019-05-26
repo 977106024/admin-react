@@ -2,6 +2,7 @@ import React from 'react'
 import './Index.scss'
 import { Card, Table, Divider, Tag } from 'antd';
 import SearchFrom from '@/components/Search/Search'
+import { Link } from 'react-router-dom'
 
 const columns = [
     {
@@ -103,7 +104,7 @@ export default class GameConfig extends React.Component{
     render(){
         return (
             <section id="GameConfig">
-                <Card title="游戏配置" extra={<a href="#">添加游戏</a>} style={{ width: '100%' }}>
+                <Card title="游戏配置" extra={<Link to="/index/gameConfig/gameDetails">添加游戏</Link>} style={{ width: '100%' }}>
                     <SearchFrom criteria={this.state.searchCriteria} criteriaVal={this.criteriaVal.bind(this)}/>
                 </Card>
                 <Card className="card-table" size="small" style={{ width: '100%' }}>
