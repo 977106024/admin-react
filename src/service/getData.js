@@ -1,16 +1,16 @@
 
 import axios from 'axios'
+import qs from 'qs'
 import APIURL from '@/config/env'
 
+axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
-    console.log(config)
     let TOKEN = localStorage.getItem('TOKEN')
     if(TOKEN){
         config.headers["x-access-token"] = TOKEN
     }
-    console.log(config)
     return config
 })
 
@@ -61,5 +61,17 @@ export const uploadImg = (param) => (
         method: 'post',
         url:`${APIURL}/admin/Upload`,
         data:param
+    })
+)
+
+/**
+ * 新增游戏
+ * @param gameInfo
+ */
+export const addGame = (param) =>(
+    axios({
+        method:'post',
+        url:`${APIURL}/admin/AddGame`,
+        data:qs.stringify(param)
     })
 )

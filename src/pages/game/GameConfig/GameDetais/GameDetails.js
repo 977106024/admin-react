@@ -1,50 +1,33 @@
 import React from 'react'
 import UploadImgCom from '@/components/UpLoad/UpLoad'
 import {Card,Form,Input,Rate,Button,Icon,message } from 'antd'
+import {addGame} from '@/service/getData'
 
 
 class GameDetails extends React.Component {
     state = {
-        imageUrl:"",
-        loading: false,
     }
 
-    beforeUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        if (!isJPG) {
-            message.error('You can only upload JPG file!');
-        }
-        const isLt2M = file.size / 1024 / 1024 < 2;
-        if (!isLt2M) {
-            message.error('Image must smaller than 2MB!');
-        }
-        return isJPG && isLt2M;
-    }
-
-    handleChange = info => {
-        if (info.file.status === 'uploading') {
-            this.setState({ loading: true });
-            return;
-        }
-        if (info.file.status === 'done') {
-            // Get this url from response in real world.
-            getBase64(info.file.originFileObj, imageUrl =>
-                this.setState({
-                    imageUrl,
-                    loading: false,
-                }),
-            );
-        }
-    };
 
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+                this.game(values)
             }
         });
     };
+
+    game(val){
+        const data = val
+        addGame(data).then(res=>{
+            let $res = res.data
+            if($res.code === 200){
+                console.log($res.data)
+            }
+        })
+    }
 
     render(){
         const { getFieldDecorator } = this.props.form;
@@ -52,13 +35,6 @@ class GameDetails extends React.Component {
             labelCol: { span: 6 },
             wrapperCol: { span: 14 },
         };
-        const imageUrl = this.state.imageUrl;
-        const uploadButton = (
-            <div>
-                <Icon type={this.state.loading ? 'loading' : 'plus'} />
-                <div className="ant-upload-text">Upload</div>
-            </div>
-        );
         return (
             <section id="GameDetails">
                 <Card title="游戏详情" style={{ width: '100%' }} onSubmit={this.handleSubmit}>
