@@ -46,22 +46,12 @@ export default class UploadCom extends React.Component {
     uploadFile(e){
         // const {filename,file} = val
         let file = e.target.files[0]
-
-        const formData = new FormData();
-        formData.append("imgFile", file, file.name);
+        const formData = new FormData()
+        formData.append('imgfile',file,file.name)
         uploadImg(formData).then(res=>{
             console.log(res)
         })
 
-        // let config = {
-        //     headers:{'Content-Type':'multipart/form-data'}
-        // };  //添加请求头
-        // axios.get('https://api.xuewuzhijing.top/admin/Upload?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiNDJlYjVhMTAtN2ZiMS0xMWU5LWI5ZGItMTNkYWFjZWNmNTFmIiwiaWF0IjoxNTU4ODczNTA0LCJleHAiOjE1NTg4NzcxMDR9.Xesg2OHpSTIaLdcDCNwfMw6sQMZwtsYxj3QFdEZXkN4',{
-        //     params:formData,
-        //     config
-        // }).then(res=>{
-        //     console.log(res)
-        // })
     }
 
     render() {

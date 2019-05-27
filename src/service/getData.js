@@ -46,7 +46,7 @@ export const loginStatus = (param) => (
  */
 export const statusQr = (param) => (
     axios({
-        methods: 'get',
+        method: 'get',
         url: `${APIURL}/admin/statusQr`,
         params: param
     })
@@ -58,11 +58,8 @@ export const statusQr = (param) => (
  */
 export const uploadImg = (param) => (
     axios({
-        methods: 'post',
-        url:`${APIURL}/weChatApp/upImgFile?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY2E5NDZjMDAtN2ZiYS0xMWU5LTk0ZjMtNjUxNGE3NTQ5ZTZlIiwiaWF0IjoxNTU4ODc3NTkzLCJleHAiOjE1NTg4ODExOTN9.Ip-dt4o2dZq_Zhx9N2xU2QC8gKmTdjY7BLF3_OBfThw`,
-        data:param,
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
+        method: 'post',
+        url:`${APIURL}/admin/Upload`,
+        data:param
     })
 )
