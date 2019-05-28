@@ -75,3 +75,12 @@ export const addGame = (param) =>(
         data:qs.stringify(param)
     })
 )
+
+export const getGameList = (param) =>(
+    axios({
+        method:'get',
+        url:`${APIURL}/admin/getGameList`,
+        params:param
+    })
+)
+

@@ -3,79 +3,66 @@ import './Index.scss'
 import { Card, Table, Divider, Tag } from 'antd';
 import SearchFrom from '@/components/Search/Search'
 import { Link } from 'react-router-dom'
+import {getGameList} from '@/service/getData'
 
 const columns = [
     {
-        title: 'Name',
+        title: 'cover',
+        dataIndex: 'cover',
+        key: 'cover',
+},
+    {
+        title: 'name',
         dataIndex: 'name',
         key: 'name',
         render: text => <a href="javascript:;">{text}</a>,
 },
 {
-    title: 'Age',
-        dataIndex: 'age',
-    key: 'age',
+    title: 'id',
+    dataIndex: '_id',
+    key: '_id',
 },
 {
-    title: 'Address',
-        dataIndex: 'address',
-    key: 'address',
+    title: 'url',
+        dataIndex: 'url',
+    key: 'url',
 },
-{
-    title: 'Tags',
-        key: 'tags',
-    dataIndex: 'tags',
-    render: tags => (
-<span>
-{tags.map(tag => {
-        let color = tag.length > 5 ? 'geekblue' : 'green';
-    if (tag === 'loser') {
-        color = 'volcano';
-    }
-    return (
-        <Tag color={color} key={tag}>
-    {tag.toUpperCase()}
-    </Tag>
-);
-})}
-</span>
-),
-},
-{
-    title: 'Action',
-        key: 'action',
-    render: (text, record) => (
-<span>
-<a href="javascript:;">Invite {record.name}</a>
-<Divider type="vertical" />
-    <a href="javascript:;">Delete</a>
-    </span>
-),
-},
-];
-
-const data = [
+// {
+//     title: 'Tags',
+//         key: 'tags',
+//     dataIndex: 'tags',
+//     render: tags => (
+// <span>
+// {tags.map(tag => {
+//         let color = tag.length > 5 ? 'geekblue' : 'green';
+//     if (tag === 'loser') {
+//         color = 'volcano';
+//     }
+//     return (
+//         <Tag color={color} key={tag}>
+//     {tag.toUpperCase()}
+//     </Tag>
+// );
+// })}
+// </span>
+// ),
+// },
     {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
+        title: 'reta',
+        dataIndex: 'reta',
+        key: 'reta',
     },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
+// {
+//     title: 'Action',
+//         key: 'action',
+//     render: (text, record) => (
+// <span>
+// <a href="javascript:;">Invite {record.name}</a>
+// <Divider type="vertical" />
+//     <a href="javascript:;">Delete</a>
+//     </span>
+// ),
+// },
 ];
 
 export default class GameConfig extends React.Component{
@@ -93,7 +80,24 @@ export default class GameConfig extends React.Component{
                 name:"text",
                 id:"number"
             }
+        },
+        list:[]
+    }
+
+    componentWillMount() {
+        const data = {
+            name:'',
+            id:''
         }
+        getGameList(data).then(res=>{
+            let $res = res.data
+            if($res.code === 200){
+                this.setState({
+                    list:$res.data
+                })
+            }
+
+        })
     }
 
     //search
@@ -108,7 +112,7 @@ export default class GameConfig extends React.Component{
                     <SearchFrom criteria={this.state.searchCriteria} criteriaVal={this.criteriaVal.bind(this)}/>
                 </Card>
                 <Card className="card-table" size="small" style={{ width: '100%' }}>
-                    <Table columns={columns} dataSource={data} />
+                    <Table rowKey="_id" columns={columns} dataSource={this.state.list} />
                 </Card>
             </section>
         )
