@@ -1,13 +1,25 @@
 import React from 'react'
 import UploadImgCom from '@/components/UpLoad/UpLoad'
 import {Card,Form,Input,Rate,Button,Icon,message } from 'antd'
-import {addGame} from '@/service/getData'
+import {addGame,getGameDetails} from '@/service/getData'
 
 
 class GameDetails extends React.Component {
     state = {
+        list:''
     }
 
+    componentWillMount() {
+        let id = this.props.location.search.split('=')[1]
+        getGameDetails({id:id}).then(res=>{
+            let $res = res.data
+            if($res.code === 200){
+                this.setState({
+                    list:$res.data
+                })
+            }
+        })
+    }
 
     handleSubmit = e => {
         e.preventDefault();
@@ -44,7 +56,7 @@ class GameDetails extends React.Component {
                         </Form.Item>
                         <Form.Item label="游戏名称">
                             {getFieldDecorator('name', {
-
+                                initialValue:this.state.list.name
                             })(<Input placeholder="请输入游戏名称"/>)}
                         </Form.Item>
                         <Form.Item label="url地址">

@@ -15,8 +15,8 @@ const columns = [
         title: 'name',
         dataIndex: 'name',
         key: 'name',
-        render: text => <a href="javascript:;">{text}</a>,
-},
+        render: (text,record) =>  <Link to={`/index/gameConfig/gameDetails?id=${record._id}`}>{text}</Link>,
+    },
 {
     title: 'id',
     dataIndex: '_id',
@@ -71,10 +71,7 @@ export default class GameConfig extends React.Component{
         searchCriteria:{
             name:{
                     name:"游戏名称",
-                    id:"游戏Id",
-                    xxx:"4",
-                    sss:"55",
-                    sss:"8888"
+                    id:"游戏Id"
                 },
             type:{
                 name:"text",
@@ -99,6 +96,7 @@ export default class GameConfig extends React.Component{
 
         })
     }
+
 
     //search
     criteriaVal(val){

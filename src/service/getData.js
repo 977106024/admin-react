@@ -76,10 +76,26 @@ export const addGame = (param) =>(
     })
 )
 
+/**
+ * 游戏列表
+ * @param name id
+ */
 export const getGameList = (param) =>(
     axios({
         method:'get',
-        url:`${APIURL}/admin/getGameList`,
+        url:`${APIURL}/admin/GetGameList`,
+        params:param
+    })
+)
+
+/**
+ * 游戏详情
+ * @param id
+ */
+export const getGameDetails = (param) =>(
+    axios({
+        method:'get',
+        url:`${APIURL}/admin/GetGameDetails`,
         params:param
     })
 )
