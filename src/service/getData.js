@@ -1,7 +1,11 @@
-
+import React from 'react'
+import { createBrowserHistory } from 'history';
 import axios from 'axios'
 import qs from 'qs'
 import APIURL from '@/config/env'
+import { message} from 'antd';
+
+const history = createBrowserHistory();
 
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
@@ -13,6 +17,24 @@ axios.interceptors.request.use(function (config) {
     }
     return config
 })
+
+// 添加响应拦截器
+axios.interceptors.response.use(function (response) {
+    // 对响应数据做点什么
+    let data = response.data
+    if(data.code === -200){
+        message.warning(`${data.data}!`);
+    }else if(data.code === 300){
+        message.error('服务器错误!');
+    }else if(data.code === 400){
+        message.warning(`请重新登陆！`)
+        history.push('/login');
+    }
+    return response;
+}, function (error) {
+    // 对响应错误做点什么
+    return Promise.reject(error);
+});
 
 
 /**
@@ -99,4 +121,19 @@ export const getGameDetails = (param) =>(
         params:param
     })
 )
+
+/**
+ * 删除游戏
+ * @param id
+ */
+export const removeGame = (param) =>(
+    axios({
+        method:'post',
+        url:`${APIURL}/admin/RemoveGame`,
+        params:param
+    })
+)
+
+
+
 

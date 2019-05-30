@@ -1,24 +1,31 @@
 import React from 'react'
 import UploadImgCom from '@/components/UpLoad/UpLoad'
-import {Card,Form,Input,Rate,Button,Icon,message } from 'antd'
-import {addGame,getGameDetails} from '@/service/getData'
+import {Card,Form,Input,Rate,Button,Icon,message,Row,Col,Popconfirm } from 'antd'
+import {addGame,getGameDetails,removeGame} from '@/service/getData'
 
 
 class GameDetails extends React.Component {
     state = {
-        list:''
+        list:[],
+        id:''
     }
 
     componentWillMount() {
         let id = this.props.location.search.split('=')[1]
-        getGameDetails({id:id}).then(res=>{
-            let $res = res.data
-            if($res.code === 200){
-                this.setState({
-                    list:$res.data
-                })
-            }
-        })
+        if(id){
+            this.setState({
+                id:id
+            })
+            //获取游戏详情
+            getGameDetails({id:id}).then(res=>{
+                let $res = res.data
+                if($res.code === 200){
+                    this.setState({
+                        list:$res.data
+                    })
+                }
+            })
+        }
     }
 
     handleSubmit = e => {
@@ -31,12 +38,25 @@ class GameDetails extends React.Component {
         });
     };
 
+    //添加游戏 编辑游戏
     game(val){
         const data = val
         addGame(data).then(res=>{
             let $res = res.data
             if($res.code === 200){
                 console.log($res.data)
+            }
+        })
+    }
+
+
+    //删除游戏
+    handleDelete(){
+        console.log(`删除${this.state.id}`)
+        removeGame({id:this.state.id}).then(res=>{
+            let $res = res.data
+            if($res.code === 200 && $res.data){
+                this.porps.history.go(-1)
             }
         })
     }
@@ -61,21 +81,30 @@ class GameDetails extends React.Component {
                         </Form.Item>
                         <Form.Item label="url地址">
                             {getFieldDecorator('url', {
-
+                                initialValue:this.state.list.url
                             })(<Input placeholder="请输入游戏url"/>)}
                         </Form.Item>
                         <Form.Item label="Rate">
                             {getFieldDecorator('rate', {
-                                initialValue: 5,
+                                initialValue: this.state.list.reta || 5,
                             })(<Rate />)}
                         </Form.Item>
                         <Form.Item label="封面">
-                            <UploadImgCom/>
+                            <UploadImgCom img={this.state.list.cover}/>
                         </Form.Item>
-                        <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                            <Button type="primary" htmlType="submit">
-                                Submit
-                            </Button>
+                        <Form.Item>
+                            <Row>
+                                <Col span={3} offset={9}>
+                                    <Button type="primary" htmlType="submit">
+                                        Submit
+                                    </Button>
+                                </Col>
+                                <Col span={2}>
+                                    <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete()}>
+                                        <a href="javascript:;">Delete</a>
+                                    </Popconfirm>
+                                </Col>
+                            </Row>
                         </Form.Item>
                     </Form>
                 </Card>
