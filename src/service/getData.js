@@ -1,11 +1,12 @@
 import React from 'react'
-import { createBrowserHistory } from 'history';
 import axios from 'axios'
 import qs from 'qs'
 import APIURL from '@/config/env'
 import { message} from 'antd';
 
-const history = createBrowserHistory();
+//组件外跳转方法
+import {createHashHistory} from 'history';
+const history = createHashHistory();
 
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
@@ -22,13 +23,15 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(function (response) {
     // 对响应数据做点什么
     let data = response.data
-    if(data.code === -200){
+    if(data.code === 200 && data.data){
+        message.success('成功')
+    }else if(data.code === -200){
         message.warning(`${data.data}!`);
     }else if(data.code === 300){
         message.error('服务器错误!');
     }else if(data.code === 400){
         message.warning(`请重新登陆！`)
-        history.push('/login');
+        history.push("/login")
     }
     return response;
 }, function (error) {

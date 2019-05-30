@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-import {BrowserRouter as Router} from "react-router-dom";
+import {HashRouter as Router} from "react-router-dom";
 import Index from './pages/Index/Index'
-import {RouterApp} from './router/router'
+import {RouterApp} from './router/router';
+
 
 ReactDOM.render(
     <Router>
