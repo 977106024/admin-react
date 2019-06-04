@@ -15,6 +15,7 @@ class RouterMain extends React.Component {
     render() {
         return (
             <div>
+                <Route exact path="/" component={GameConfig}></Route>
                 <Route exact path="/index/gameConfig" component={GameConfig}></Route>
                 <Route exact path="/index/gameConfig/gameDetails" component={GameDetails}></Route>
                 <Route path="index/gameQuery" component={GameQuery}></Route>
@@ -33,6 +34,7 @@ class RouterApp extends React.Component {
             <Switch>
                 <Route path="/login" component={Login}/>
                 <Route path="/index" component={Index}/>
+                <Route path="/" component={Index}/>
             </Switch>
         )
     }

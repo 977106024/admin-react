@@ -5,11 +5,13 @@ import { Breadcrumb, Alert } from 'antd';
 
 
 const breadcrumbNameMap = {
+    '/index': '游戏管理',
     '/index/gameConfig': '游戏配置',
+    '/index/gameConfig/gameDetails': '游戏详情',
     '/index/gameQuery': '游戏查询'
 };
 const columnName = {
-    'game':'游戏管理'
+    'game':'游戏'
 }
 const Home = withRouter(props => {
 
@@ -19,7 +21,7 @@ const Home = withRouter(props => {
         const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
         return (
             <Breadcrumb.Item key={url}>
-                <Link to={url}>{breadcrumbNameMap[url]}</Link>
+                <Link to={url}>{breadcrumbNameMap[url] != '/#' ? breadcrumbNameMap[url] : null}</Link>
             </Breadcrumb.Item>
         );
     });
