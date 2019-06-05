@@ -75,17 +75,18 @@ export default class GameConfig extends React.Component{
                 },
             type:{
                 name:"text",
-                id:"number"
+                id:"text"
             }
         },
         list:[]
     }
 
     componentWillMount() {
-        const data = {
-            name:'',
-            id:''
-        }
+        this.gameList()
+    }
+
+    //游戏列表
+    gameList(data={}){
         getGameList(data).then(res=>{
             let $res = res.data
             if($res.code === 200){
@@ -97,10 +98,10 @@ export default class GameConfig extends React.Component{
         })
     }
 
-
     //search
     criteriaVal(val){
         console.log(val)
+        this.gameList(val)
     }
 
     render(){

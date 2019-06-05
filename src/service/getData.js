@@ -24,7 +24,7 @@ axios.interceptors.response.use(function (response) {
     // 对响应数据做点什么
     let data = response.data
     if(data.code === 200 && data.data){
-        message.success('成功')
+        // message.success('成功')
     }else if(data.code === -200){
         message.warning(`${data.data}!`);
     }else if(data.code === 300){
