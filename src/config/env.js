@@ -1,3 +1,3 @@
-const APIURL = 'http://localhost:2333'
+const APIURL = 'https://api.xuewuzhijing.top'
 
 export default APIURL
