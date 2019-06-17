@@ -45,6 +45,7 @@ class GameDetails extends React.Component {
             let $res = res.data
             if($res.code === 200){
                 console.log($res.data)
+                message.success('成功')
             }
         })
     }
@@ -57,6 +58,7 @@ class GameDetails extends React.Component {
             let $res = res.data
             if($res.code === 200 && $res.data){
                 // this.porps.history.go(-1)
+                message.success('成功')
             }
         })
     }
@@ -83,6 +85,11 @@ class GameDetails extends React.Component {
                             {getFieldDecorator('url', {
                                 initialValue:this.state.list.url
                             })(<Input placeholder="请输入游戏url"/>)}
+                        </Form.Item>
+                        <Form.Item label="游戏描述">
+                            {getFieldDecorator('describe', {
+                                initialValue:this.state.list.describe
+                            })(<Input placeholder="请输入游戏描述"/>)}
                         </Form.Item>
                         <Form.Item label="Rate">
                             {getFieldDecorator('rate', {
