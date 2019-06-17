@@ -133,7 +133,7 @@ export const removeGame = (param) =>(
     axios({
         method:'post',
         url:`${APIURL}/admin/RemoveGame`,
-        params:param
+        data:qs.stringify(param)
     })
 )
 

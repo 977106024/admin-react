@@ -56,7 +56,7 @@ class GameDetails extends React.Component {
         removeGame({id:this.state.id}).then(res=>{
             let $res = res.data
             if($res.code === 200 && $res.data){
-                this.porps.history.go(-1)
+                // this.porps.history.go(-1)
             }
         })
     }
