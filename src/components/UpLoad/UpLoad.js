@@ -42,21 +42,21 @@ export default class UploadCom extends React.Component {
         }
     };
 
-    uploadFile(val){
-        return
-        const {filename,file} = val
-        console.log(val)
-        // let file = e.target.files[0]
-        const formData = new FormData()
-        formData.append('imgfile',file,file.name)
-        uploadImg(formData).then(res=>{
-            let $res = res.data
-            if($res.code === 200) {
-                console.log('上传成功！')
-            }
-        })
-
-    }
+    // uploadFile(val){
+    //     return
+    //     const {filename,file} = val
+    //     console.log(val)
+    //     // let file = e.target.files[0]
+    //     const formData = new FormData()
+    //     formData.append('imgfile',file,file.name)
+    //     uploadImg(formData).then(res=>{
+    //         let $res = res.data
+    //         if($res.code === 200) {
+    //             console.log('上传成功！')
+    //         }
+    //     })
+    //
+    // }
 
     render() {
         const uploadButton = (
@@ -74,11 +74,10 @@ export default class UploadCom extends React.Component {
                 showUploadList={false}
                 action="http://localhost:2333/admin/Upload"
                 beforeUpload={beforeUpload}
-                onChange={this.uploadFile.bind(this)}
+                onChange={this.handleChange}
             >
-                {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
+                {imageUrl ? <img src={imageUrl} alt="game" /> : uploadButton}
             </Upload>
-            // <input type="file" onChange={this.uploadFile.bind(this)}/>
         );
     }
 }
