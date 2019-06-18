@@ -26,7 +26,6 @@ export default class UploadCom extends React.Component {
     };
 
     handleChange = info => {
-        console.log(info,'111')
         if (info.file.status === 'uploading') {
             this.setState({ loading: true });
             return;
@@ -61,7 +60,7 @@ export default class UploadCom extends React.Component {
                 <div className="ant-upload-text">Upload</div>
             </div>
         );
-        const imageUrl = this.props.img;
+        const imageUrl = this.state.imageUrl ? this.state.imageUrl : this.props.img;
         return (
             <Upload
                 name="game"
