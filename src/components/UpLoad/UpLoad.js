@@ -9,9 +9,9 @@ function getBase64(img, callback) {
 }
 
 function beforeUpload(file) {
-    const isJPG = file.type === 'image/jpeg';
+    const isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJPG) {
-        message.error('You can only upload JPG file!');
+        message.error('You can only upload JPG or png file!');
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
