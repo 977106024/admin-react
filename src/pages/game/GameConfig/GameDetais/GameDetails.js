@@ -33,7 +33,7 @@ class GameDetails extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                this.game({id:this.state.id,...values})
+                this.game({id:this.state.id,cover:this.state.cover,...values})
             }
         });
     };
@@ -60,6 +60,14 @@ class GameDetails extends React.Component {
                 // this.porps.history.go(-1)
                 message.success('成功')
             }
+        })
+    }
+
+    //游戏图片
+    getUrl(url){
+        console.log(url)
+        this.setState({
+            cover:url
         })
     }
 
@@ -97,7 +105,7 @@ class GameDetails extends React.Component {
                             })(<Rate />)}
                         </Form.Item>
                         <Form.Item label="封面">
-                            <UploadImgCom img={this.state.list.cover}/>
+                            <UploadImgCom img={this.state.list.cover} onImgUrl={this.getUrl.bind(this)}/>
                         </Form.Item>
                         <Form.Item>
                             <Row>

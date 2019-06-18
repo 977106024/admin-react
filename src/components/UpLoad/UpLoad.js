@@ -1,6 +1,5 @@
 import React from 'react'
 import { Upload, Icon, message } from 'antd';
-import {uploadImg} from '@/service/getData'
 
 
 function getBase64(img, callback) {
@@ -27,36 +26,33 @@ export default class UploadCom extends React.Component {
     };
 
     handleChange = info => {
+        console.log(info,'111')
         if (info.file.status === 'uploading') {
             this.setState({ loading: true });
             return;
         }
         if (info.file.status === 'done') {
-            // Get this url from response in real world.
-            getBase64(info.file.originFileObj, imageUrl =>
+            //获取后端返回的图片地址
+            if(parseInt(info.file.response.code) === 200){
                 this.setState({
-                    imageUrl,
+                    imageUrl:info.file.response.data,
                     loading: false,
-                }),
-            );
+                })
+                //交给父组件
+                this.props.onImgUrl(info.file.response.data)
+                message.success('图片上传成功！')
+            }
+
+            // Get this url from response in real world.
+            // getBase64(info.file.originFileObj, imageUrl =>
+            //     this.setState({
+            //         imageUrl,
+            //         loading: false,
+            //     }),
+            // );
         }
     };
 
-    // uploadFile(val){
-    //     return
-    //     const {filename,file} = val
-    //     console.log(val)
-    //     // let file = e.target.files[0]
-    //     const formData = new FormData()
-    //     formData.append('imgfile',file,file.name)
-    //     uploadImg(formData).then(res=>{
-    //         let $res = res.data
-    //         if($res.code === 200) {
-    //             console.log('上传成功！')
-    //         }
-    //     })
-    //
-    // }
 
     render() {
         const uploadButton = (
@@ -65,14 +61,14 @@ export default class UploadCom extends React.Component {
                 <div className="ant-upload-text">Upload</div>
             </div>
         );
-        const imageUrl = this.state.imageUrl;
+        const imageUrl = this.props.img;
         return (
             <Upload
                 name="game"
                 listType="picture-card"
                 className="avatar-uploader"
                 showUploadList={false}
-                action="http://localhost:2333/admin/Upload"
+                action="https://api.xuewuzhijing.top/admin/Upload"
                 beforeUpload={beforeUpload}
                 onChange={this.handleChange}
             >

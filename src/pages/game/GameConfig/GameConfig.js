@@ -10,6 +10,7 @@ const columns = [
         title: 'cover',
         dataIndex: 'cover',
         key: 'cover',
+        render:text => <img class="cover" src={text} alt=""/>
 },
     {
         title: 'name',
