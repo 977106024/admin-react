@@ -1,7 +1,6 @@
 import React from 'react'
 import { Upload, Icon, message } from 'antd';
 import {uploadImg} from '@/service/getData'
-import axios from 'axios'
 
 
 function getBase64(img, callback) {
@@ -43,13 +42,18 @@ export default class UploadCom extends React.Component {
         }
     };
 
-    uploadFile(e){
-        // const {filename,file} = val
-        let file = e.target.files[0]
+    uploadFile(val){
+        return
+        const {filename,file} = val
+        console.log(val)
+        // let file = e.target.files[0]
         const formData = new FormData()
         formData.append('imgfile',file,file.name)
         uploadImg(formData).then(res=>{
-            console.log(res)
+            let $res = res.data
+            if($res.code === 200) {
+                console.log('上传成功！')
+            }
         })
 
     }
@@ -63,7 +67,18 @@ export default class UploadCom extends React.Component {
         );
         const imageUrl = this.state.imageUrl;
         return (
-            <input type="file" onChange={this.uploadFile.bind(this)}/>
+            <Upload
+                name="game"
+                listType="picture-card"
+                className="avatar-uploader"
+                showUploadList={false}
+                action="http://localhost:2333/admin/Upload"
+                beforeUpload={beforeUpload}
+                onChange={this.uploadFile.bind(this)}
+            >
+                {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
+            </Upload>
+            // <input type="file" onChange={this.uploadFile.bind(this)}/>
         );
     }
 }
