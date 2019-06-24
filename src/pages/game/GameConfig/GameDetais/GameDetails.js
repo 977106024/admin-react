@@ -6,7 +6,7 @@ import {withRouter} from 'react-router-dom'
 
 class GameDetails extends React.Component {
     state = {
-        list:[],
+        list:{},
         id:''
     }
 
@@ -29,11 +29,12 @@ class GameDetails extends React.Component {
     }
 
     handleSubmit = e => {
+        const list = this.state.list
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                this.game({id:this.state.id,cover:this.state.cover,...values})
+                this.game({id:this.state.id,cover:list.cover,...values})
             }
         });
     };
@@ -67,7 +68,10 @@ class GameDetails extends React.Component {
     getUrl(url){
         console.log(url)
         this.setState({
-            cover:url
+            list:{
+                cover:url,
+                ...this.state.list
+            }
         })
     }
 
