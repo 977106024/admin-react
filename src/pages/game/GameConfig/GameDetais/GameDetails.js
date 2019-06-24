@@ -2,7 +2,7 @@ import React from 'react'
 import UploadImgCom from '@/components/UpLoad/UpLoad'
 import {Card,Form,Input,Rate,Button,Icon,message,Row,Col,Popconfirm } from 'antd'
 import {addGame,getGameDetails,removeGame} from '@/service/getData'
-
+import {withRouter} from 'react-router-dom'
 
 class GameDetails extends React.Component {
     state = {
@@ -44,8 +44,8 @@ class GameDetails extends React.Component {
         addGame(data).then(res=>{
             let $res = res.data
             if($res.code === 200){
-                console.log($res.data)
                 message.success('成功')
+                this.props.history.go(-1)
             }
         })
     }
@@ -57,8 +57,8 @@ class GameDetails extends React.Component {
         removeGame({id:this.state.id}).then(res=>{
             let $res = res.data
             if($res.code === 200 && $res.data){
-                // this.porps.history.go(-1)
                 message.success('成功')
+                this.props.history.go(-1)
             }
         })
     }
@@ -135,4 +135,4 @@ function getBase64(img, callback) {
 }
 
 const GameDetailsFrom = Form.create({ name: 'validate_other' })(GameDetails);
-export default GameDetailsFrom
+export default withRouter(GameDetailsFrom)
