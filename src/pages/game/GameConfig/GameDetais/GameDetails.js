@@ -69,8 +69,8 @@ class GameDetails extends React.Component {
         console.log(url)
         this.setState({
             list:{
-                cover:url,
-                ...this.state.list
+                ...this.state.list,
+                cover:url
             }
         })
     }
